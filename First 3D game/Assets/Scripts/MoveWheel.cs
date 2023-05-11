@@ -53,13 +53,11 @@ public class MoveWheel : MonoBehaviour
     
     void UpdateWheel(WheelCollider collider, Transform transform)
     {
-        Vector3 pos;
-        Quaternion quat;
+        Vector3 pos = transform.position;
+        Quaternion quat = transform.rotation;
         collider.GetWorldPose(out pos, out quat);
-        
-        Transform visualWheel = collider.transform.GetChild(0);
-        
-        visualWheel.transform.position = pos;
-        visualWheel.transform.rotation = quat;
+        quat = quat * Quaternion.Euler(new Vector3(0, 90, 0));
+        transform.position = pos;
+        transform.rotation = quat;
     }
 }
